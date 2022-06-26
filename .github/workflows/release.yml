@@ -5,21 +5,9 @@ on:
     branches:
       - 'production'
 
-# env:
-#   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-#   FLY_ORG: ${{ secrets.FLY_ORG }}
-#   FLY_REGION: ${{ secrets.FLY_REGION }}
-
 jobs:
   deploy_release:
     runs-on: ubuntu-latest
-
-    # concurrency:
-    #   group: pr-${{ github.event.number }}
-
-    # environment:
-    #   name: pr-${{ github.event.number }}
-    #   url: ${{ steps.deploy.outputs.url }}
 
     steps:
       - uses: styfle/cancel-workflow-action@0.9.1
@@ -41,11 +29,17 @@ jobs:
         env:
           NODE_ENV: production
 
-      # - uses: brentd/fly-staging-app@v1
-      #   id: deploy
+      - uses: amondnet/vercel-action@v20
+        with:
+          github-comment: true
+          github-token: ${{ github.token }}
+          vercel-args: '--prod'
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
 
-      # - uses: strumwolf/delete-deployment-environment@v2
-      #   if: ${{ github.event.action == 'closed' }}
-      #   with:
-      #     environment: pr-${{ github.event.number }}
-      #     token: ${{ github.token }}
+      - uses: strumwolf/delete-deployment-environment@v2
+        if: ${{ github.event.action == 'closed' }}
+        with:
+          environment: pr-${{ github.event.number }}
+          token: ${{ github.token }}

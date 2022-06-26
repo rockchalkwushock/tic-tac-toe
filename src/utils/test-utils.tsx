@@ -1,5 +1,3 @@
-import { DataClient, DataProvider } from '@services/data'
-import { Router } from '@services/router'
 import type { RenderOptions } from '@testing-library/react'
 import { cleanup, render } from '@testing-library/react'
 import { afterEach } from 'vitest'
@@ -8,11 +6,7 @@ afterEach(() => cleanup())
 
 const customRender = (ui: React.ReactElement, options?: RenderOptions) =>
 	render(ui, {
-		wrapper: ({ children }) => (
-			<DataProvider client={new DataClient()}>
-				<Router>{children}</Router>
-			</DataProvider>
-		),
+		wrapper: ({ children }) => children,
 		...options,
 	})
 
