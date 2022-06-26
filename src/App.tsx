@@ -9,10 +9,10 @@ function App() {
 
 	const dynamicStyles = (symbol: Player) => {
 		if (symbol === 'O') {
-			return 'bg-amber-100 text-amber-700 rounded-full'
+			return '!bg-amber-100 !text-amber-700 !rounded-full'
 		}
 		if (symbol === 'X') {
-			return 'bg-indigo-100 text-indigo-700 rounded-full'
+			return '!bg-indigo-100 !text-indigo-700 !rounded-full'
 		}
 		return ''
 	}
