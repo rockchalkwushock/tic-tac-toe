@@ -16,9 +16,7 @@
 			"@assets/*": ["assets/*"],
 			"@components/*": ["components/*"],
 			"@contexts/*": ["contexts/*"],
-			"@hooks/*": ["hooks/*"],
 			"@interfaces/*": ["interfaces/*"],
-			"@pages/*": ["pages/*"],
 			"@services/*": ["services/*"],
 			"@utils/*": ["utils/*"]
 		},
